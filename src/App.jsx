@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TVShowAPI } from "./api/tv-show";
-import "./global.css";
+import { BACKDROP_BASE_URL } from "./config";
 import s from "./style.module.css";
-import { useEffect } from "react";
+import "./global.css";
 
 TVShowAPI.fetchPopulars();
 
 export function App() {
-  const [currentTvShow, setCurrentTVShow] = useState();
+  const [currentTVShow, setCurrentTVShow] = useState();
 
   async function fetchPopulars() {
     const populars = await TVShowAPI.fetchPopulars();
@@ -15,26 +15,34 @@ export function App() {
       setCurrentTVShow(populars[0]);
     }
   }
-
   useEffect(() => {
     fetchPopulars();
   }, []);
-  console.log("***", currentTvShow);
+
+  console.log("***", currentTVShow);
+
   return (
-    <div className={s.main_container}>
+    <div
+      className={s.main_container}
+      style={{
+        background: currentTVShow
+          ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("${BACKDROP_BASE_URL}${currentTVShow.backdrop_path}") no-repeat center / cover`
+          : "black",
+      }}
+    >
       <div className={s.header}>
         <div className="row">
           <div className="col-4">
-            <div>Logo</div>
-            <div>Subtitle</div>
+            <div>Logo here</div>
+            <div>subtitle</div>
           </div>
-          <div className="col-sm-12 col-md-4">
-            <input type="text" />
+          <div className="col-md-12 col-lg-4">
+            <input style={{ width: "100%" }} type="text" />
           </div>
         </div>
       </div>
-      <div className={s.tv_show_detail}>Detail</div>
-      <div className={s.recommentations}>Recommandations</div>
+      <div className={s.tv_show_details}>Tv show detail</div>
+      <div className={s.recommended_shows}>Recommended tv shows</div>
     </div>
   );
 }
