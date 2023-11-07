@@ -38,7 +38,9 @@ export function App() {
           </div>
         </div>
       </div>
-      <div className={s.tv_show_details}><TVShowDetail/></div>
+      <div className={s.tv_show_details}>
+        {currentTVShow && <TVShowDetail tvShow={currentTVShow}/>}
+      </div>
       <div className={s.recommended_shows}>Recommended tv shows</div>
     </div>
   );
