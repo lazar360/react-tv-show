@@ -3,8 +3,14 @@
     font-size: 35px;
 }
 
-.rating{
+.rating_container{
+    display: flex;
 
+}
+
+.rating{
+    margin-top: 3px;
+    margin-left: 5px;
 }
 
 .overview:hover{
