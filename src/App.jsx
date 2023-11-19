@@ -6,20 +6,39 @@ import "./global.css";
 import { TVShowDetail } from "./components/TVShowDetails/TVShowDetails";
 import { Logo } from "./components/Logo/Logo";
 import logo from "./assets/images/logo.png";
+import { TVShowList } from "./components/TVShowList/TVShowList";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
+  const [recommendationList, setRecommendationList] = useState([]);
 
   async function fetchPopulars() {
     const populars = await TVShowAPI.fetchPopulars();
     if (populars.length > 0) {
-      setCurrentTVShow(populars[0]);
+      setCurrentTVShow(populars[1]);
     }
   }
+
+  async function fetchRecommendations(tvShowId) {
+    const recommendations = await TVShowAPI.fetchRecommendations(tvShowId);
+    if (recommendations.length > 0) {
+      setRecommendationList(recommendations.slice(0, 9));
+    }
+  }
+
   useEffect(() => {
     fetchPopulars();
   }, []);
 
+  useEffect(() => {
+    if (currentTVShow) fetchRecommendations(currentTVShow.id)
+  }, [currentTVShow]);
+
+  function setCurrentTvShowFromRecommendation(tvShow){
+    alert(JSON.stringify(tvShow));
+  }
+
+  console.log("***", recommendationList);
   return (
     <div
       className={s.main_container}
@@ -46,7 +65,9 @@ export function App() {
       <div className={s.tv_show_details}>
         {currentTVShow && <TVShowDetail tvShow={currentTVShow} />}
       </div>
-      <div className={s.recommended_shows}>Recommended tv shows</div>
+      <div className={s.recommended_shows}>
+        {recommendationList && recommendationList.length>0 && (<TVShowList TVShowList={recommendationList}/>)}
+      </div>
     </div>
   );
 }
