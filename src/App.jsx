@@ -58,7 +58,7 @@ export function App() {
             />
           </div>
           <div className="col-md-12 col-lg-4">
-            <input style={{ width: "100%" }} type="text" />
+            <SearchBar />
           </div>
         </div>
       </div>
