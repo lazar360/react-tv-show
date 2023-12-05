@@ -7,6 +7,7 @@ import { TVShowDetail } from "./components/TVShowDetails/TVShowDetails";
 import { Logo } from "./components/Logo/Logo";
 import logo from "./assets/images/logo.png";
 import { TVShowList } from "./components/TVShowList/TVShowList";
+import { SearchBar } from "./components/SearchBar/SearchBar";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
@@ -15,7 +16,7 @@ export function App() {
   async function fetchPopulars() {
     const populars = await TVShowAPI.fetchPopulars();
     if (populars.length > 0) {
-      setCurrentTVShow(populars[1]);
+      setCurrentTVShow(populars[0]);
     }
   }
 
@@ -34,11 +35,13 @@ export function App() {
     if (currentTVShow) fetchRecommendations(currentTVShow.id)
   }, [currentTVShow]);
 
-  function setCurrentTvShowFromRecommendation(tvShow){
-    alert(JSON.stringify(tvShow));
+  async function searchTVShow(tvShowName){
+    const searchResponse = await TVShowAPI.fetchByTitle(tvShowName);
+    if(searchResponse.length > 0){
+      setCurrentTVShow(searchResponse[0]);
+    }
   }
 
-  console.log("***", recommendationList);
   return (
     <div
       className={s.main_container}
@@ -58,7 +61,7 @@ export function App() {
             />
           </div>
           <div className="col-md-12 col-lg-4">
-            <SearchBar />
+            <SearchBar onSubmit={searchTVShow}/>
           </div>
         </div>
       </div>
@@ -67,7 +70,7 @@ export function App() {
       </div>
       <div className={s.recommended_shows}>
         {recommendationList && recommendationList.length>0 && 
-        (<TVShowList onClickItem={setCurrentTVShow(tvShow)} TVShowList={recommendationList}/>)}
+        (<TVShowList onClickItem={setCurrentTVShow} TVShowList={recommendationList}/>)}
       </div>
     </div>
   );
