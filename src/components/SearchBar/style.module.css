@@ -6,7 +6,7 @@ margin-left: 15px;
 
 .input{
 border-radius: 30px;
-background-color: #d9d9d96e;
+background-color: black;
 height: 30px;
 font-weight: 100;
 font-size: 20px;
@@ -17,6 +17,7 @@ color: white;
 }
 
 .input::placeholder{
+    padding-left: 45px;
     color: (194, 194, 194);
 }
 
