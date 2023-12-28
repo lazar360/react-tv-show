@@ -23,6 +23,6 @@ Users can do the following :
   
 ![Capture d'écran 2023-12-28 165519](https://github.com/lazar360/react-tv-show/assets/91179295/af056f33-beb5-4ef1-810b-eddd59c69b99)
 
-<h2>Link to demo website (to watch on your phone)</h2>
+<h2>Link to demo website</h2>
  
 Follow this <a href="https://react-tv-show-virid.vercel.app/">link</a> 
