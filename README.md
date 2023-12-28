@@ -21,7 +21,7 @@ Users can do the following :
 
 <h2>Demo</h2>
   
-***
+![Capture d'écran 2023-12-28 165519](https://github.com/lazar360/react-tv-show/assets/91179295/af056f33-beb5-4ef1-810b-eddd59c69b99)
 
 <h2>Link to demo website (to watch on your phone)</h2>
  
